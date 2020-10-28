@@ -1,18 +1,30 @@
 import './App.css'
 import React, { useState, useEffect, FC } from 'react'
-import ls from 'local-storage'
 
 function App () {
-  const [storage, setStorage] = useState([])
-  const [user, setUser] = useState('')
+  const [storage, setStorage] = useState([]);
+  const [user, setUser] = useState('');
+  const [highScore, setHighScore] = useState('Zero');
 
   const checkUser = () => {
-    console.log(user)
+    // if user exists, set their high score in state
+    if (localStorage.getItem(user)) {
+      // TODO: Remove console logs
+      console.log('user exists');
+      setHighScore(localStorage.getItem(user))
+    }
+    // if they don't exist, save their username
+    else {
+      // TODO: Remove console logs
+      console.log('no exist')
+      localStorage.setItem(user, 'Zero')
+    }
   }
 
   return (
     <div>
       <h5>Please enter a name!</h5>
+      <h3>current high score: {highScore}</h3>
       <form>
         <div class='form-group'>
           <input
@@ -22,7 +34,7 @@ function App () {
             aria-describedby='username'
           ></input>
         </div>
-        <button type='button' class='btn btn-primary' onClick={(e) => checkUser(e)}>
+        <button type='button' class='btn btn-primary' onClick={() => checkUser()}>
           Submit
         </button>
       </form>
