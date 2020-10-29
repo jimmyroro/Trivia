@@ -12,18 +12,41 @@ function Question () {
     return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
   }
 
+  // a function to shuffle an array in place
+  function shuffle(array) {
+    let currentIndex = array.length, temporaryValue, randomIndex;  
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+    return array;
+  }
+
+  // a function to combine correct and incorrect answers into one array, then randomize their order
+  function randomize(questionObj) {
+    questionObj.options = [];
+    questionObj.incorrect.map((answer) => questionObj.options.push(answer))
+    questionObj.options.push(questionObj.correct);
+    shuffle(questionObj.options);    
+  }
+
   useEffect(() => {
     // when Question first renders, generate random numbers and use them to select triviaQuestions
-    // push those questions into a temporary array, making sure there are no duplicates, then save the array in state
-    let temp = [];
-    while (temp.length <= 9) {
+    // push those questions into a temporary array, making sure there are no duplicates, randomizing their answers,
+    // then save the array in state
+    let tempArray = [];
+    while (tempArray.length <= 9) {
       let random = getRandomInt(0, triviaQuestions.length)
-      if (!temp.includes(triviaQuestions[random])) {
-        temp.push(triviaQuestions[random]);
+      if (!tempArray.includes(triviaQuestions[random])) {
+        randomize(triviaQuestions[random]);
+        tempArray.push(triviaQuestions[random]);
         console.log(triviaQuestions[random].question)
       }
     }
-    setRoundQuestions(temp);
+    setRoundQuestions(tempArray);
   }, [])
 
   // once the roundQuestions are populated, update the currentQuestion
@@ -33,6 +56,8 @@ function Question () {
     }
     else setCurrentQuestion(currentQuestion + 1)
   }, roundQuestions)
+
+
 
   return (
     <div>
