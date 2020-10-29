@@ -1,8 +1,11 @@
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect } from 'react';
 import triviaQuestions from './triviaQuestions.json';
 
 function Question () {
-  const [roundQuestions, setRoundQuestions] = useState([]);
+  const [roundQuestions, setRoundQuestions] = useState(null);
+  const [currentQuestion, setCurrentQuestion] = useState(null);
+
+  // a function to create a random integer
   function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -17,14 +20,25 @@ function Question () {
       let random = getRandomInt(0, triviaQuestions.length)
       if (!temp.includes(triviaQuestions[random])) {
         temp.push(triviaQuestions[random]);
+        console.log(triviaQuestions[random].question)
       }
     }
     setRoundQuestions(temp);
   }, [])
 
+  // once the roundQuestions are populated, update the currentQuestion
+  useEffect(() => {
+    if (currentQuestion === null) {
+      setCurrentQuestion(0);
+    }
+    else setCurrentQuestion(currentQuestion + 1)
+  }, roundQuestions)
+
   return (
     <div>
-      hi
+    {(currentQuestion !== null) &&
+      <h4>{roundQuestions[currentQuestion].question}</h4>
+    }
     </div>
   )
 }
