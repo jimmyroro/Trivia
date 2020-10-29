@@ -4,6 +4,7 @@ import triviaQuestions from './triviaQuestions.json';
 function Question () {
   const [roundQuestions, setRoundQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
 
   // a function to create a random integer
   function getRandomInt(min, max) {
@@ -62,7 +63,22 @@ function Question () {
   return (
     <div>
     {(currentQuestion !== null) &&
-      <h4>{roundQuestions[currentQuestion].question}</h4>
+      <div>
+        <h4>{roundQuestions[currentQuestion].question}</h4>
+        {roundQuestions.[currentQuestion].options.map((option, index) => 
+          <div class="form-check">
+              <div >
+                <input class="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                <label class="form-check-label" for={"answer" + index} >
+                  {option}
+                </label>
+              </div>
+          </div>
+        )}
+          <button type='button' class='btn btn-primary' onClick={() => setCurrentQuestion(currentQuestion + 1)}>
+          Submit
+          </button>
+      </div>
     }
     </div>
   )
