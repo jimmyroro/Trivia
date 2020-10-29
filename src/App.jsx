@@ -5,7 +5,7 @@ import Question from './Question';
 function App () {
   const [storage, setStorage] = useState([]);
   const [user, setUser] = useState('');
-  const [highScore, setHighScore] = useState('Zero');
+  const [highScore, setHighScore] = useState(0);
   const [loggedIn, setLoggedIn] = useState(false)
 
   const checkUser = () => {
@@ -20,7 +20,7 @@ function App () {
     else {
       // TODO: Remove console logs
       console.log('no exist')
-      localStorage.setItem(user, 'Zero')
+      localStorage.setItem(user, 0)
     }
     setLoggedIn(true);
   }
