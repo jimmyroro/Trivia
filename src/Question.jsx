@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import triviaQuestions from './triviaQuestions.json';
 
-function Question () {
+function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
   const [roundQuestions, setRoundQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -34,6 +34,14 @@ function Question () {
     shuffle(questionObj.options);    
   }
 
+  function checkAnswer() {
+    if (roundQuestions[currentQuestion].correct === selectedAnswer) {
+      setCurrentScore(currentScore + 1)
+    }
+    
+    setHighScore(highScore + 1);
+  }
+
   useEffect(() => {
     // when Question first renders, generate random numbers and use them to select triviaQuestions
     // push those questions into a temporary array, making sure there are no duplicates, randomizing their answers,
@@ -44,7 +52,6 @@ function Question () {
       if (!tempArray.includes(triviaQuestions[random])) {
         randomize(triviaQuestions[random]);
         tempArray.push(triviaQuestions[random]);
-        console.log(triviaQuestions[random].question)
       }
     }
     setRoundQuestions(tempArray);
@@ -65,7 +72,7 @@ function Question () {
     {(currentQuestion !== null) &&
       <div>
         <h4>{roundQuestions[currentQuestion].question}</h4>
-        {roundQuestions.[currentQuestion].options.map((option, index) => 
+        {roundQuestions[currentQuestion].options.map((option, index) => 
           <div class="form-check">
               <div >
                 <input class="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
@@ -75,7 +82,7 @@ function Question () {
               </div>
           </div>
         )}
-          <button type='button' class='btn btn-primary' onClick={() => setCurrentQuestion(currentQuestion + 1)}>
+          <button type='button' class='btn btn-primary' onClick={() => checkAnswer()}>
           Submit
           </button>
       </div>
