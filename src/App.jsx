@@ -47,7 +47,7 @@ function App () {
       {!loggedIn && 
       <div>
         <h5>Please enter a name!</h5>
-        <form>
+        <form onSubmit={() => checkUser()}>
           <div class='form-group'>
             <input
               onChange={(e) => setUser(e.target.value)}
