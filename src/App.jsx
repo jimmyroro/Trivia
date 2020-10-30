@@ -28,10 +28,11 @@ function App () {
       setHighScore(currentScore);
       localStorage.setItem(user, currentScore);
     }
-  }, currentScore)
+  }, [currentScore])
 
   return (
     <div>
+      {/* once the user logs in, show the header and the question */}
       {loggedIn && 
         <div>
           <Header
@@ -40,13 +41,13 @@ function App () {
             user={user}
           />
           <Question
-            highScore={highScore}
-            setHighScore={setHighScore}
             currentScore={currentScore}
             setCurrentScore={setCurrentScore}
+            user={user}
           />
         </div>
       }
+      {/* prompt user to log in with a name */}
       {!loggedIn && 
       <div id="notLoggedIn">
         <h5>Please enter a name!</h5>

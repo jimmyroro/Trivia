@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import triviaQuestions from './triviaQuestions.json';
 
-function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
+function Question ({currentScore, setCurrentScore}) {
   const [roundQuestions, setRoundQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -63,8 +63,8 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
     setRoundQuestions(tempArray);
   }
 
+  // when Question first renders, generate the roundQuestions
   useEffect(() => {
-    // when Question first renders, generate the roundQuestions
     generateRoundQuestions();
   }, [])
 
@@ -80,6 +80,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
 
   return (
     <div>
+      {/* render when the last (10th) question has been answered */}
       {currentQuestion === 10 &&
       <div>
         <h3>Congrats! You got {currentScore} questions right!</h3>
@@ -88,6 +89,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
         </button>
       </div>
       }
+      {/* renders once the roundQuestions have been generated and the currentQuestion set */}
       {((currentQuestion < 10) && (currentQuestion != null) ) &&
         <div>
           <h4>{roundQuestions[currentQuestion].question}</h4>
@@ -106,6 +108,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
               </button>
             </div>
           }
+          {/* shown after the user submits their answer */}
           {submitted && 
             <div>
               <h3>{roundQuestions[currentQuestion].correct}</h3>
