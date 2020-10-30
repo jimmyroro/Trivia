@@ -5,6 +5,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
   const [roundQuestions, setRoundQuestions] = useState(null);
   const [currentQuestion, setCurrentQuestion] = useState(null);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [submitted, setSubmitted] = useState(false);
 
   // a function to create a random integer
   function getRandomInt(min, max) {
@@ -35,11 +36,12 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
   }
 
   function checkAnswer() {
-    if (roundQuestions[currentQuestion].correct === selectedAnswer) {
-      setCurrentScore(currentScore + 1)
+    if (submitted === false) {
+      if (roundQuestions[currentQuestion].correct === selectedAnswer) {
+        setCurrentScore(currentScore + 1)
+      }
     }
-    
-    setHighScore(highScore + 1);
+    setSubmitted(true);
   }
 
   useEffect(() => {
@@ -72,7 +74,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
     {(currentQuestion !== null) &&
       <div>
         <h4>{roundQuestions[currentQuestion].question}</h4>
-        {roundQuestions[currentQuestion].options.map((option, index) => 
+        {submitted === false && roundQuestions[currentQuestion].options.map((option, index) => 
           <div class="form-check">
               <div >
                 <input class="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
@@ -82,8 +84,14 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
               </div>
           </div>
         )}
+        {submitted && 
+          <h3>{roundQuestions[currentQuestion].correct}</h3>
+        }
           <button type='button' class='btn btn-primary' onClick={() => checkAnswer()}>
-          Submit
+          Check Answer
+          </button>
+          <button type='button' class='btn btn-primary' onClick={() => {setCurrentQuestion(currentQuestion + 1); setSubmitted(false)}}>
+          Next Question
           </button>
       </div>
     }
