@@ -35,6 +35,7 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
     shuffle(questionObj.options);    
   }
 
+  // checks if the selected answer is the correct answer, updating current score if necessary and making submitted = true
   function checkAnswer() {
     if (roundQuestions[currentQuestion].correct === selectedAnswer) {
       setCurrentScore(currentScore + 1)
@@ -42,8 +43,8 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
     setSubmitted(true);
   }
 
-  useEffect(() => {
-    // when Question first renders, generate random numbers and use them to select triviaQuestions
+  function generateRoundQuestions() {
+    // generate random numbers and use them to select triviaQuestions
     // push those questions into a temporary array, making sure there are no duplicates, randomizing their answers,
     // then save the array in state
     let tempArray = [];
@@ -54,7 +55,17 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
         tempArray.push(triviaQuestions[random]);
       }
     }
+    // check to see if we are restarting a round; if so, reset score and question counter
+    if (currentQuestion === 10) {
+      setCurrentQuestion(0);
+      setCurrentScore(0);
+    }
     setRoundQuestions(tempArray);
+  }
+
+  useEffect(() => {
+    // when Question first renders, generate the roundQuestions
+    generateRoundQuestions();
   }, [])
 
   // once the roundQuestions are populated, update the currentQuestion
@@ -63,13 +74,21 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
       setCurrentQuestion(0);
     }
     else setCurrentQuestion(currentQuestion + 1)
-  }, roundQuestions)
+  }, [roundQuestions])
 
 
 
   return (
     <div>
-      {(currentQuestion !== null) &&
+      {currentQuestion === 10 &&
+      <div>
+        <h3>Congrats! You got {currentScore} questions right!</h3>
+        <button type='button' class='btn btn-primary' onClick={() => generateRoundQuestions()}>
+          Play again!
+        </button>
+      </div>
+      }
+      {((currentQuestion < 10) && (currentQuestion != null) ) &&
         <div>
           <h4>{roundQuestions[currentQuestion].question}</h4>
           {submitted === false &&
