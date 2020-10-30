@@ -86,7 +86,7 @@
     "correct": "Unicorn"
   },
   {
-    "question": "Where in the world is the only place where Canada is *due south*",
+    "question": "Where in the world is the only place where Canada is *due south*?",
     "incorrect": ["Alaska", "Russia", "Washington"],
     "correct": "Detroit"
   },
