@@ -36,10 +36,8 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
   }
 
   function checkAnswer() {
-    if (submitted === false) {
-      if (roundQuestions[currentQuestion].correct === selectedAnswer) {
-        setCurrentScore(currentScore + 1)
-      }
+    if (roundQuestions[currentQuestion].correct === selectedAnswer) {
+      setCurrentScore(currentScore + 1)
     }
     setSubmitted(true);
   }
@@ -71,30 +69,34 @@ function Question ({ highScore, setHighScore, currentScore, setCurrentScore}) {
 
   return (
     <div>
-    {(currentQuestion !== null) &&
-      <div>
-        <h4>{roundQuestions[currentQuestion].question}</h4>
-        {submitted === false && roundQuestions[currentQuestion].options.map((option, index) => 
-          <div class="form-check">
-              <div >
-                <input class="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
-                <label class="form-check-label" for={"answer" + index} >
-                  {option}
-                </label>
-              </div>
-          </div>
-        )}
-        {submitted && 
-          <h3>{roundQuestions[currentQuestion].correct}</h3>
-        }
-          <button type='button' class='btn btn-primary' onClick={() => checkAnswer()}>
-          Check Answer
-          </button>
-          <button type='button' class='btn btn-primary' onClick={() => {setCurrentQuestion(currentQuestion + 1); setSubmitted(false)}}>
-          Next Question
-          </button>
-      </div>
-    }
+      {(currentQuestion !== null) &&
+        <div>
+          <h4>{roundQuestions[currentQuestion].question}</h4>
+          {submitted === false &&
+            <div>
+              {roundQuestions[currentQuestion].options.map((option, index) => 
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                  <label class="form-check-label" for={"answer" + index} >
+                    {option}
+                  </label>
+                </div>
+              )}
+              <button type='button' class='btn btn-primary' onClick={() => checkAnswer()}>
+                Check Answer
+              </button>
+            </div>
+          }
+          {submitted && 
+            <div>
+              <h3>{roundQuestions[currentQuestion].correct}</h3>
+              <button type='button' class='btn btn-primary' onClick={() => {setCurrentQuestion(currentQuestion + 1); setSubmitted(false)}}>
+              Next Question
+              </button>
+            </div>
+          }
+        </div>
+      }
     </div>
   )
 }
