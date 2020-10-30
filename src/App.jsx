@@ -1,9 +1,8 @@
 import './App.css';
-import React, { useState, useEffect, FC } from 'react';
+import React, { useState, useEffect } from 'react';
 import Question from './Question';
 
 function App () {
-  const [storage, setStorage] = useState([]);
   const [user, setUser] = useState('');
   const [highScore, setHighScore] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false)
@@ -12,19 +11,23 @@ function App () {
   const checkUser = () => {
     // if user exists, retrieve info from localstorage and set their high score in state as a number
     if (localStorage.getItem(user)) {
-      // TODO: Remove console logs
-      console.log('user exists');
       setHighScore(parseInt(localStorage.getItem(user)))
     }
     // if they don't exist, save their username
     else {
-      // TODO: Remove console logs
-      console.log('no exist')
       localStorage.setItem(user, 0)
       setHighScore(0)
     }
     setLoggedIn(true);
   }
+
+  // when currentScore changes, check if highScore needs to update
+  useEffect(() => {
+    if (currentScore > highScore) {
+      setHighScore(currentScore);
+      localStorage.setItem(user, currentScore);
+    }
+  }, currentScore)
 
   return (
     <div>
