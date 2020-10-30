@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Question from './Question';
+import Header from './Header';
 
 function App () {
   const [user, setUser] = useState('');
@@ -33,9 +34,11 @@ function App () {
     <div>
       {loggedIn && 
         <div>
-          <h3>current high score: {highScore}</h3>
-          <h3>current score: {currentScore}</h3>
-          <h3>Logged in as {user}</h3>
+          <Header
+            highScore={highScore}
+            currentScore={currentScore}
+            user={user}
+          />
           <Question
             highScore={highScore}
             setHighScore={setHighScore}
@@ -45,10 +48,10 @@ function App () {
         </div>
       }
       {!loggedIn && 
-      <div>
+      <div id="notLoggedIn">
         <h5>Please enter a name!</h5>
-        <form onSubmit={() => checkUser()}>
-          <div class='form-group'>
+        <form onSubmit={() => checkUser()} id="usernameForm">
+          <div class='form-group' >
             <input
               onChange={(e) => setUser(e.target.value)}
               type='text'
