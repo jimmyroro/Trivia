@@ -97,7 +97,7 @@ function Question ({currentScore, setCurrentScore}) {
             <div >
               {roundQuestions[currentQuestion].options.map((option, index) => 
                 <div className="form-check" key={"answer" + index}>
-                  <input className="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                  <input className="form-check-input" type="radio" data-testid={"answer" + index} id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
                   <label className="form-check-label" for={"answer" + index} >
                     {option}
                   </label>
@@ -111,7 +111,7 @@ function Question ({currentScore, setCurrentScore}) {
           {/* shown after the user submits their answer */}
           {submitted && 
             <div>
-              <h3>{roundQuestions[currentQuestion].correct}</h3>
+              <h3>The correct answer is: {roundQuestions[currentQuestion].correct}</h3>
               <button type='button' className='btn btn-primary' onClick={() => {setCurrentQuestion(currentQuestion + 1); setSubmitted(false)}}>
               Next Question
               </button>
