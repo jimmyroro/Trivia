@@ -20,7 +20,14 @@ describe('App', () => {
     expect(screen.getByRole('textbox')).toBeInTheDocument();
     userEvent.type(screen.getByRole('textbox'), 'dummyUser{enter}');
     expect(screen.getByText(/dummyUser/)).toBeInTheDocument();
+  })
 
+  test('the navbar should display a currentScore and highScore upon login', () => {
+    render(<App/>)
+    userEvent.type(screen.getByRole('textbox'), 'dummyUser{enter}');
+    expect(screen.getByText(/High score: 0/)).toBeInTheDocument();
+    expect(screen.getByText(/Current score: 0/)).toBeInTheDocument();
+  })
 
     // test('questions should not duplicate', () => {
 
