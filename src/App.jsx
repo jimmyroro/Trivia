@@ -52,15 +52,15 @@ function App () {
       <div id="notLoggedIn">
         <h5>Please enter a name!</h5>
         <form onSubmit={() => checkUser()} id="usernameForm">
-          <div class='form-group' >
+          <div className='form-group' >
             <input
               onChange={(e) => setUser(e.target.value)}
               type='text'
-              class='form-control'
+              className='form-control'
               aria-describedby='username'
             ></input>
           </div>
-          <button type='button' class='btn btn-primary' onClick={() => checkUser()}>
+          <button type='button' className='btn btn-primary' onClick={() => checkUser()}>
             Submit
           </button>
         </form>
