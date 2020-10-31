@@ -92,13 +92,13 @@ function Question ({currentScore, setCurrentScore}) {
       {/* renders once the roundQuestions have been generated and the currentQuestion set */}
       {((currentQuestion < 10) && (currentQuestion != null) ) &&
         <div>
-          <h4>{roundQuestions[currentQuestion].question}</h4>
+          <h4 data-testid="question">{roundQuestions[currentQuestion].question}</h4>
           {submitted === false &&
             <div >
               {roundQuestions[currentQuestion].options.map((option, index) => 
                 <div className="form-check" key={"answer" + index}>
                   <input className="form-check-input" type="radio" data-testid={"answer" + index} id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
-                  <label className="form-check-label" for={"answer" + index} >
+                  <label className="form-check-label" >
                     {option}
                   </label>
                 </div>
