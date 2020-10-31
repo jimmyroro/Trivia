@@ -15,6 +15,12 @@ describe('App', () => {
     shallow(<App/>)
   })
 
+  test('can enter a username', () => {
+    render(<App/>)
+    expect(screen.getByRole('textbox')).toBeInTheDocument();
+    userEvent.type(screen.getByRole('textbox'), 'dummyUser{enter}');
+    expect(screen.getByText(/dummyUser/)).toBeInTheDocument();
+
 
     // test('questions should not duplicate', () => {
 
