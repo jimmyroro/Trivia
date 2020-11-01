@@ -1,22 +1,53 @@
+body {
+  background: url(./knowledgeBackground.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+}
+
 /* the button and input box shown before the user logs in */
 #notLoggedIn {
   margin-top: 20%;
   text-align: center;
+
 }
 
+/* the form in the beginning the user inputs their username */
 #usernameForm {
   max-width: 50%;
   margin-left: 25%;
   margin-right: 25%;
 }
 
+/* navbar at the top of the page */
 #navbar {
   background-color: chocolate;
+  /* background: rgba(25, 25, 25, .0); */
 }
 
 .navbarElement {
   padding-left: 5%;
   padding-right: 5%;
-  padding-top: 2%;
-  padding-bottom: 2%;
+}
+
+/* the question area, including the button and answers */
+.questionArea {
+  text-align: center;
+  margin-top: 12%;
+  background: url(./old-brown-paper-texture-image.jpg) no-repeat;
+  background-size: 100% 100%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+.answer {
+  padding-top: 1%;
+  text-align: center;
+}
+
+/* all the buttons */
+.btn {
+  margin: 2%;
 }
