@@ -1,6 +1,6 @@
 # Trivia!
-I made this for Tandem's engineering apprentice application. You enter a username, and begin answering 10 trivia questions. \n
-Your username and high score are stored in local storage. \n
+I made this for Tandem's engineering apprentice application. You enter a username, and begin answering 10 trivia questions. \
+Your username and high score are stored in local storage. \
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses React version 17.0.1
 
 ## To run the app
@@ -22,7 +22,7 @@ In the project directory, you can run:
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\n
+Launches the test runner in the interactive watch mode.\
 It will use the App.test.js file and rerun the tests each time you edit files.
 
 ### `yarn build`
