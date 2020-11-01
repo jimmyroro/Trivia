@@ -63,6 +63,12 @@ function Question ({currentScore, setCurrentScore}) {
     setRoundQuestions(tempArray);
   }
 
+  function nextQuestion() {
+    setCurrentQuestion(currentQuestion + 1);
+    setSelectedAnswer(null);
+    setSubmitted(false);
+  }
+
   // when Question first renders, generate the roundQuestions
   useEffect(() => {
     generateRoundQuestions();
@@ -82,23 +88,23 @@ function Question ({currentScore, setCurrentScore}) {
     <div>
       {/* render when the last (10th) question has been answered */}
       {currentQuestion === 10 &&
-      <div>
-        <h3>Congrats! You got {currentScore} questions right!</h3>
+      <div className="questionArea">
+        <h3>Congratulations! You got {currentScore} questions right!</h3>
         <button type='button' className='btn btn-primary' onClick={() => generateRoundQuestions()}>
-          Play again!
+          Play again?
         </button>
       </div>
       }
       {/* renders once the roundQuestions have been generated and the currentQuestion set */}
       {((currentQuestion < 10) && (currentQuestion != null) ) &&
-        <div>
-          <h4 data-testid="question">{roundQuestions[currentQuestion].question}</h4>
+        <div className="questionArea">
+          <h4>{roundQuestions[currentQuestion].question}</h4>
           {submitted === false &&
             <div >
               {roundQuestions[currentQuestion].options.map((option, index) => 
-                <div className="form-check" key={"answer" + index}>
-                  <input className="form-check-input" type="radio" data-testid={"answer" + index} id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
-                  <label className="form-check-label" >
+                <div className="form-check answer" key={"answer" + index}>
+                  <input className="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                  <label className="form-check-label" for={"answer" + index} >
                     {option}
                   </label>
                 </div>
@@ -110,9 +116,16 @@ function Question ({currentScore, setCurrentScore}) {
           }
           {/* shown after the user submits their answer */}
           {submitted && 
-            <div>
-              <h3>The correct answer is: {roundQuestions[currentQuestion].correct}</h3>
-              <button type='button' className='btn btn-primary' onClick={() => {setCurrentQuestion(currentQuestion + 1); setSubmitted(false)}}>
+            <div className="questionArea">
+              {/* user got it correct */}
+              {roundQuestions[currentQuestion].correct === selectedAnswer &&
+                <h3>Correct! {roundQuestions[currentQuestion].correct}</h3>
+              }
+              {/* user got it incorrect */}
+              {roundQuestions[currentQuestion].correct !== selectedAnswer &&
+                <h3>Sorry, the correct answer is: {roundQuestions[currentQuestion].correct}</h3>
+              }
+              <button type='button' className='btn btn-primary' onClick={() => nextQuestion()}>
               Next Question
               </button>
             </div>
