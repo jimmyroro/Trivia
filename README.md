@@ -8,7 +8,7 @@ get into the appropriate directory: cd trivia
 
 install local dependencies: yarn install \
   -you can also use: npm install \
-  -Dependencies can be found in the package.json \
+  -Dependencies can be found in the package.json
 
 run the app in development mode: yarn start \
   -you can also use: npm start \
