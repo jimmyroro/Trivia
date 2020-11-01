@@ -6,12 +6,12 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## To run the app
 get into the appropriate directory: cd trivia
 
-install local dependencies: yarn install
-  -you can also use: npm install
-  -Dependencies can be found in the package.json
+install local dependencies: yarn install \
+  -you can also use: npm install \
+  -Dependencies can be found in the package.json\
 
-run the app in development mode: yarn start
-  -you can also use: npm start
+run the app in development mode: yarn start \
+  -you can also use: npm start \
   -Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 
