@@ -49,8 +49,8 @@ function App () {
       }
       {/* prompt user to log in with a name */}
       {!loggedIn && 
-      <div id="notLoggedIn">
-        <h5>Please enter a name!</h5>
+      <div className="oldParchment">
+        <h3>Please enter a name!</h3>
         <form onSubmit={() => checkUser()} id="usernameForm">
           <div className='form-group' >
             <input

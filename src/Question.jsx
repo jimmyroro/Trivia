@@ -85,10 +85,10 @@ function Question ({currentScore, setCurrentScore}) {
 
 
   return (
-    <div>
+    <div id="questionArea">
       {/* render when the last (10th) question has been answered */}
       {currentQuestion === 10 &&
-      <div className="questionArea">
+      <div className="oldParchment">
         <h3>Congratulations! You got {currentScore} questions right!</h3>
         <button type='button' className='btn btn-primary' onClick={() => generateRoundQuestions()}>
           Play again?
@@ -97,18 +97,18 @@ function Question ({currentScore, setCurrentScore}) {
       }
       {/* renders once the roundQuestions have been generated and the currentQuestion set */}
       {((currentQuestion < 10) && (currentQuestion != null) ) &&
-        <div className="questionArea">
-          <h4>{roundQuestions[currentQuestion].question}</h4>
+        <div>
           {submitted === false &&
-            <div >
-              {roundQuestions[currentQuestion].options.map((option, index) => 
-                <div className="form-check answer" key={"answer" + index}>
-                  <input className="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
-                  <label className="form-check-label" for={"answer" + index} >
-                    {option}
-                  </label>
-                </div>
-              )}
+            <div className="oldParchment">
+              <h3>{roundQuestions[currentQuestion].question}</h3>
+                {roundQuestions[currentQuestion].options.map((option, index) => 
+                  <div className="form-check answer" key={"answer" + index}>
+                    <input className="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                    <label className="form-check-label answer" for={"answer" + index} >
+                      {option}
+                    </label>
+                  </div>
+                )}
               <button type='button' className='btn btn-primary' onClick={() => checkAnswer()}>
                 Check Answer
               </button>
@@ -116,7 +116,7 @@ function Question ({currentScore, setCurrentScore}) {
           }
           {/* shown after the user submits their answer */}
           {submitted && 
-            <div className="questionArea">
+            <div className="oldParchment">
               {/* user got it correct */}
               {roundQuestions[currentQuestion].correct === selectedAnswer &&
                 <h3>Correct! {roundQuestions[currentQuestion].correct}</h3>
