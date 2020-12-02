@@ -103,7 +103,7 @@ function Question ({currentScore, setCurrentScore}) {
               <h3>{roundQuestions[currentQuestion].question}</h3>
                 {roundQuestions[currentQuestion].options.map((option, index) => 
                   <div className="form-check answer" key={"answer" + index}>
-                    <input className="form-check-input" type="radio" name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
+                    <input className="form-check-input" type="radio" data-testid={"answer" + index} name="answers" id={"answer" + index} value={option} onClick={(e) => setSelectedAnswer(e.target.value)}/>
                     <label className="form-check-label answer" for={"answer" + index} >
                       {option}
                     </label>

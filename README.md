@@ -4,14 +4,15 @@ Your username and high score are stored in local storage. \
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It uses React version 17.0.1
 
 ## To run the app
-get into the appropriate directory: cd trivia
+Clone the repository, then get into the appropriate directory: cd trivia
 
 install local dependencies: yarn install \
-  -you can also use: npm install \
   -Dependencies can be found in the package.json
 
+
+run the build command to create the build: yarn run build
+
 run the app in development mode: yarn start \
-  -you can also use: npm start \
   -Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 

@@ -27,11 +27,12 @@ describe('App', () => {
     expect(screen.getByText(/Current score: 0/)).toBeInTheDocument();
   })
 
-  test('after clicking submit, the answer should display', () => {
+  test('after clicking submit, the answer should display', async () => {
     render(<Question />)
-    userEvent.click(screen.getByTestId("answer0"));
-    userEvent.click(screen.getByRole('button'));
-    expect(screen.getByText(/The correct answer is: /)).toBeInTheDocument();
+    await userEvent.click(screen.getByTestId("answer0"));
+    await userEvent.click(screen.getByRole('button'));
+    // this only checks that there is a header afterwards. an improvement would be to somehow access and compare the correct answer
+    await expect(screen.getByRole(/heading/)).toBeInTheDocument();
   })
 
   test('clicking next question button should show another, different question', async () => {
@@ -39,14 +40,10 @@ describe('App', () => {
     const firstQuestion = screen.getByRole('heading').innerHTML;
     await userEvent.click(screen.getByTestId("answer0"));
     await userEvent.click(screen.getByRole('button'));
-    //this is the next question button
+    //this clicks the next question button
     await userEvent.click(screen.getByRole('button'));
     const secondQuestion = screen.getByRole('heading').innerHTML;
     await expect(firstQuestion).not.toEqual(secondQuestion);
   })
-    // test('questions should not duplicate', () => {
-
-    // })
-
 })
 
