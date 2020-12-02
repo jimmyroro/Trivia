@@ -27,7 +27,7 @@ function App () {
     if (currentScore > highScore) {
       setHighScore(currentScore);
       localStorage.setItem(user, currentScore);
-    }
+    } // eslint-disable-next-line
   }, [currentScore])
 
   return (

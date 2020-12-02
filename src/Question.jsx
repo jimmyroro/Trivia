@@ -71,7 +71,7 @@ function Question ({currentScore, setCurrentScore}) {
 
   // when Question first renders, generate the roundQuestions
   useEffect(() => {
-    generateRoundQuestions();
+    generateRoundQuestions(); // eslint-disable-next-line
   }, [])
 
   // once the roundQuestions are populated, update the currentQuestion
@@ -79,7 +79,7 @@ function Question ({currentScore, setCurrentScore}) {
     if (currentQuestion === null) {
       setCurrentQuestion(0);
     }
-    else setCurrentQuestion(currentQuestion + 1)
+    else setCurrentQuestion(currentQuestion + 1) // eslint-disable-next-line
   }, [roundQuestions])
 
 
